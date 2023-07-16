@@ -4,6 +4,8 @@ import App from "../App.tsx";
 import Login from "../pages/auth/Login/Login.tsx";
 import Signup from "../pages/auth/Signup/Signup.tsx";
 import NotFound from "../components/NotFound/NotFound.tsx";
+import Home from "../pages/home/Home/home.tsx";
+import DashboardLayout from "../layouts/DashboardLayout.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -11,12 +13,26 @@ const routes = createBrowserRouter([
     element: <App />,
     children: [
       {
+        index: true,
+        element: <Home />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
       {
         path: "/signup",
         element: <Signup />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Home />,
       },
     ],
   },
