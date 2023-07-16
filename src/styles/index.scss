@@ -27,3 +27,23 @@
   margin: 0 auto;
   border-radius: 50%;
 }
+
+/* ---------------- common button style --------------- */
+.common_btn {
+  padding: 0.625rem 1.75rem;
+  border-radius: 5px;
+  color: #fff;
+  background: #ed1c24;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+  font-size: 0.975rem;
+  line-height: 1.25rem;
+  transition: ease-in-out 0.7s;
+  cursor: pointer;
+
+  :hover {
+    box-shadow: inset 0 300px 0 0 #ed1c24;
+    color: white;
+    outline: none;
+  }
+}
