@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.logoImage {
+  width: 200px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.userIcon {
+  width: 40px;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 50%;
+}
