@@ -103,17 +103,31 @@ export default function Navbar() {
                 tabIndex={0}
                 className="mt-6 z-[99] p-4 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <button>
-                    <Link to="/profile">Login</Link>
-                  </button>
-                </li>
-                <li>
-                  <Link to="/dashbord">Dashboard</Link>
-                </li>
-                <li>
-                  <button onClick={handelLogout}>Logout</button>
-                </li>
+                {!user && (
+                  <>
+                    <li>
+                      <button>
+                        <Link to="/login">Login</Link>
+                      </button>
+                    </li>
+                  </>
+                )}
+
+                {user && (
+                  <>
+                    <li>
+                      <button>
+                        <Link to="/profile">Profile</Link>
+                      </button>
+                    </li>
+                    <li>
+                      <Link to="/dashbord">Dashboard</Link>
+                    </li>
+                    <li>
+                      <button onClick={handelLogout}>Logout</button>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
