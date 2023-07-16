@@ -22,9 +22,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <main>
       <MainLayout />
-    </div>
+    </main>
   );
 }
 
