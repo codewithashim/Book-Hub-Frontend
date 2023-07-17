@@ -1,8 +1,10 @@
-import { FaCat } from "react-icons/fa";
-import { IRecentBookCardProps } from "../../../types/globalTypes";
+import { FaBookOpen, FaCartPlus } from "react-icons/fa";
+import { IRecentBookCardProps } from "../../types/globalTypes";
+import { Link } from "react-router-dom";
 
 const RectntBookCard = ({ book }: IRecentBookCardProps) => {
-  const { image, title, description, genre, publicationYear, author } = book;
+  const { image, title, description, genre, publicationYear, author, id } =
+    book;
 
   return (
     <div className="card w-10/12 mx-auto bg-base-100 shadow-xl">
@@ -20,10 +22,16 @@ const RectntBookCard = ({ book }: IRecentBookCardProps) => {
         </div>
 
         <div className="card-actions">
-          <div>
-            <button className="btn btn-primary">Details</button>
+          <div className="flex gap-3 my-2">
+            <Link
+              to={`/books-details/${id}`}
+              className="btn btn-outline-primary"
+            >
+              <FaBookOpen />
+              Details
+            </Link>
             <button className="btn btn-outline-primary">
-              <FaCat />
+              <FaCartPlus />
               Wishlist
             </button>
           </div>

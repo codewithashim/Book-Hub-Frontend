@@ -1,6 +1,6 @@
 import React from "react";
 import { IBook } from "../../../types/globalTypes";
-import RecentBookCard from "../RecentBookCard/RectntBookCard";
+import RecentBookCard from "../../../components/RecentBookCard/RectntBookCard";
 
 const RecentBookData: IBook[] = [
   {

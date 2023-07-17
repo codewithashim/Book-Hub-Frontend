@@ -18,7 +18,7 @@ const Hero = () => {
               BookHub is a website where you can find books and add them to your
               library. You can also add your own books to the website.
             </p>
-            <Link to="/allBooks" className="btn btn-primary">
+            <Link to="/all-books" className="btn btn-primary">
               Get Started
             </Link>
           </div>

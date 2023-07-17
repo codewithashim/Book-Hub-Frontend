@@ -1,4 +1,4 @@
-import RecentBook from "../../recentBook/RecentBook/RecentBook";
+import RecentBook from "../RecentBook/RecentBook";
 import Hero from "../Hero/Hero";
 
 const home = () => {
