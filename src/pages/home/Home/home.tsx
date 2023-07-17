@@ -1,8 +1,12 @@
+import RecentBook from "../../recentBook/RecentBook/RecentBook";
+import Hero from "../Hero/Hero";
+
 const home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <main>
+      <Hero />
+      <RecentBook />
+    </main>
   );
 };
 

@@ -15,6 +15,11 @@
   line-height: 24px;
 }
 
+// body {
+//   max-width: 1350px;
+//   margin: 0 auto;
+// }
+
 .logoImage {
   width: 200px;
   object-fit: contain;
@@ -45,5 +50,36 @@
     box-shadow: inset 0 300px 0 0 #ed1c24;
     color: white;
     outline: none;
+  }
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: #000;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-family: "Poppins", sans-serif;
+
+  ::after {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 3px;
+    background: #ed1c24;
+    margin: 0.5rem auto;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  @media (max-width: 576px) {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
