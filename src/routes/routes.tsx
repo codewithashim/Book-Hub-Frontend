@@ -6,6 +6,7 @@ import Signup from "../pages/auth/Signup/Signup.tsx";
 import NotFound from "../components/NotFound/NotFound.tsx";
 import Home from "../pages/home/Home/home.tsx";
 import DashboardLayout from "../layouts/DashboardLayout.tsx";
+import AllBooks from "../pages/allBooks/AllBooks.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/allBooks",
+        element: <AllBooks />,
       },
     ],
   },

@@ -20,10 +20,7 @@ export default function Navbar() {
   const manuItems = (
     <>
       <li>
-        <Link to="/">Item 1</Link>
-      </li>
-      <li>
-        <Link to="/">Item 2</Link>
+        <Link to="/allBooks">All Books</Link>
       </li>
     </>
   );
@@ -121,7 +118,7 @@ export default function Navbar() {
                       </button>
                     </li>
                     <li>
-                      <Link to="/dashbord">Dashboard</Link>
+                      <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <li>
                       <button onClick={handelLogout}>Logout</button>
