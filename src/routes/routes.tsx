@@ -5,8 +5,8 @@ import Login from "../pages/auth/Login/Login.tsx";
 import Signup from "../pages/auth/Signup/Signup.tsx";
 import NotFound from "../components/NotFound/NotFound.tsx";
 import Home from "../pages/home/Home/home.tsx";
-import DashboardLayout from "../layouts/DashboardLayout.tsx";
-import AllBooks from "../pages/allBooks/AllBooks.tsx";
+import AllBooks from "../pages/books/AllBooks/AllBooks.tsx";
+import BookDetails from "../pages/books/BooksDetails/BookDetails.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -31,17 +31,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/books-details/:id",
-        element: <AllBooks />,
-      },
-    ],
-  },
-  {
-    path: "/dashboard",
-    element: <DashboardLayout />,
-    children: [
-      {
-        path: "/dashboard",
-        element: <Home />,
+        element: <BookDetails />,
       },
     ],
   },

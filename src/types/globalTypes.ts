@@ -8,7 +8,7 @@ export interface IReview {
 }
 
 export interface IBook {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   author: string;
@@ -16,6 +16,10 @@ export interface IBook {
   publicationYear: string;
   image: string;
   reviews: IReview[];
+}
+
+export interface IBookCardProps {
+  book: IBook;
 }
 
 export interface IRecentBookCardProps {

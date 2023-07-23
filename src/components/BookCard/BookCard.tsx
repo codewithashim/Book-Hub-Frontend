@@ -1,8 +1,8 @@
 import { FaBookOpen, FaCartPlus } from "react-icons/fa";
-import { IRecentBookCardProps } from "../../types/globalTypes";
+import { IBookCardProps } from "../../types/globalTypes";
 import { Link } from "react-router-dom";
 
-const RectntBookCard = ({ book }: IRecentBookCardProps) => {
+const BookCard = ({ book }: IBookCardProps) => {
   const { image, title, description, genre, publicationYear, author, _id } =
     book;
 
@@ -41,4 +41,4 @@ const RectntBookCard = ({ book }: IRecentBookCardProps) => {
   );
 };
 
-export default RectntBookCard;
+export default BookCard;
