@@ -7,6 +7,9 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { IRegister } from "../../../types/globalTypes";
 import google from "../../../assets/icons/google.svg";
+import { useAppDispatch } from "../../../redux/hook";
+import { createUser } from "../../../redux/features/user/userSlice";
+import { usePostUserMutation } from "../../../redux/features/user/userApi";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,27 +19,40 @@ const Signup = () => {
     setShowPassword(showPassword ? false : true);
   };
 
-  const onSubmit: SubmitHandler<IRegister> = async (eventData) => {
-    const { name, email, password, confirmPassword } = eventData;
-    console.log(confirmPassword, name, email, password);
+  const dispatch = useAppDispatch();
+  const [postUser] = usePostUserMutation();
 
+  const onSubmit: SubmitHandler<IRegister> = async (eventData) => {
     try {
-      Swal.fire({
-        position: "top-end",
-        timerProgressBar: true,
-        title: "Successfully Login Done !",
-        iconColor: "#ED1C24",
-        toast: true,
-        icon: "success",
-        showClass: {
-          popup: "animate__animated animate__fadeInRight",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutRight",
-        },
-        showConfirmButton: false,
-        timer: 3500,
+      const { name, email, password, confirmPassword } = eventData;
+      if (password !== confirmPassword) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Password and Confirm Password do not match!",
+          confirmButtonColor: "#0077b6",
+        });
+        return;
+      }
+
+      const data = {
+        displayName: name,
+        email,
+        password,
+      };
+      const user = await dispatch(createUser(data));
+      await postUser({
+        data: { email: email, name: name, role: "user" },
       });
+
+      if (user && user.payload) {
+        Swal.fire({
+          icon: "success",
+          title: "Account Created!",
+          text: "Your account has been created successfully.",
+          confirmButtonColor: "#0077b6",
+        });
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -49,20 +65,20 @@ const Signup = () => {
 
   return (
     <section>
-      <div className=" ">
+      <div className="">
         <div className="bg-white md:px-16">
-          <div className=" ">
+          <div className="">
             <div className="grid grid-cols-12 gap-4 ">
-              <div className="lg:col-span-5 xxs:col-span-12 justify-center flex">
-                <div className="mx-auto items-center justify-center lg:flex xxs:hidden">
+              <div className="flex justify-center lg:col-span-5 xxs:col-span-12">
+                <div className="items-center justify-center mx-auto lg:flex xxs:hidden">
                   <img
-                    className="h-3/5 w-full"
+                    className="w-full h-3/5"
                     src={loginImg}
                     alt="userSignup"
                   />
                 </div>
               </div>
-              <div className="lg:col-span-7 xxs:col-span-12 py-10">
+              <div className="py-10 lg:col-span-7 xxs:col-span-12">
                 <div className="xxs:px-[25px] xs:px-[30px] sm:px-[30px] md:px-[30px] lg:px-[28px] xl:px-[40px] py-10  bg-[#f7f7f7] shadow-md rounded-lg">
                   <h4 className="xs:text-2xl xxs:text-md sm:text-3xl md:text-3xl">
                     Account details
@@ -167,7 +183,7 @@ const Signup = () => {
                       </span>
                     </div>
 
-                    <div className="flex md:flex-row xxs:flex-col xxs:justify-center items-center mb-4 md:justify-between ">
+                    <div className="flex items-center mb-4 md:flex-row xxs:flex-col xxs:justify-center md:justify-between ">
                       <div className="flex items-center ">
                         <div className="mr-2">
                           <input id="remember" type="checkbox" />
@@ -187,19 +203,19 @@ const Signup = () => {
                           </Link>
                         </span>
                       </div>
-                      <button className="common_btn mb-5">Sign Up</button>
+                      <button className="mb-5 common_btn">Sign Up</button>
                     </div>
                   </form>
 
                   <div className="flex items-center pt-4 space-x-1">
-                    <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
+                    <div className="flex-1 h-px bg-gray-700 sm:w-16"></div>
                     <p className="px-3 text-sm text-gray-400">
                       Login with social accounts
                     </p>
-                    <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
+                    <div className="flex-1 h-px bg-gray-700 sm:w-16"></div>
                   </div>
-                  <div className="flex items-center justify-center space-x-4 pt-5">
-                    <button className="bg-white flex px-3 py-2 rounded-lg mt-2 text-lg shadow-lg">
+                  <div className="flex items-center justify-center pt-5 space-x-4">
+                    <button className="flex px-3 py-2 mt-2 text-lg bg-white rounded-lg shadow-lg">
                       <img src={google} alt="google" className="mr-1 w-7 h-7" />{" "}
                       <p className="ml-2 text-[#676767] font-[500]">
                         Sign in with Google
@@ -212,7 +228,7 @@ const Signup = () => {
           </div>
           <div className="grid grid-cols-1 ">
             <div className="bg-[#f7f7f7] shadow-md p-6 text-center">
-              <h3 className="text-xl text-black  mb-1">
+              <h3 className="mb-1 text-xl text-black">
                 Don&apos; t have a Book Hub User Account yet?
               </h3>
               <h5 className="text-lg mb-1 text-[#7a7777]">

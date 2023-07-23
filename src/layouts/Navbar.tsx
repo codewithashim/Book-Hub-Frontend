@@ -6,14 +6,24 @@ import { setUser } from "../redux/features/user/userSlice";
 import { Link } from "react-router-dom";
 import { FaCartPlus, FaRegBookmark } from "react-icons/fa";
 import userIcon from "../assets/icons/user.png";
+import Swal from "sweetalert2";
 
 export default function Navbar() {
   const { user } = useAppSelector((state) => state.user);
+  console.log(user);
+
   const dispatch = useAppDispatch();
 
   const handelLogout = () => {
     signOut(auth).then(() => {
       dispatch(setUser(null));
+      Swal.fire({
+        timerProgressBar: true,
+        title: "Successfully Logout Done !",
+        iconColor: "#ED1C24",
+        toast: true,
+        icon: "success",
+      });
     });
   };
 
@@ -91,17 +101,15 @@ export default function Navbar() {
                       <button>
                         <Link to="/login">Login</Link>
                       </button>
+                      <button className="my-2 border-spacing-1">
+                        <Link to="/signup">SignUp</Link>
+                      </button>
                     </li>
                   </>
                 )}
 
                 {user && (
                   <>
-                    <li>
-                      <button>
-                        <Link to="/profile">Profile</Link>
-                      </button>
-                    </li>
                     <li>
                       <Link to="/dashboard">Dashboard</Link>
                     </li>
