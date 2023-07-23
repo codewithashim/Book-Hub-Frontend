@@ -14,7 +14,7 @@ const PrivetRouter = ({ children }: IProps) => {
     return <div>Loading...</div>;
   }
 
-  if (!user.email && !isLoading) {
+  if (!user?.email && !isLoading) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

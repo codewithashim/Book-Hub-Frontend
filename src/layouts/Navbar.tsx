@@ -30,7 +30,10 @@ export default function Navbar() {
   const manuItems = (
     <>
       <li>
-        <Link to="/allBooks">All Books</Link>
+        <Link to="/all-books">All Books</Link>
+      </li>
+      <li>
+        <Link to="/add-books">Add New Books</Link>
       </li>
     </>
   );

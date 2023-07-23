@@ -1,26 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUser, FaQuestionCircle, FaLock } from "react-icons/fa";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import loginImg from "../../../assets/auth/usersignUp.jpeg";
 import Swal from "sweetalert2";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ILogin } from "../../../types/globalTypes";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { loginUser } from "../../../redux/features/user/userSlice";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit } = useForm<ILogin>();
+  const location = useLocation();
 
   const passwordVisible = () => {
     setShowPassword(!showPassword);
   };
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { user, isLoading } = useAppSelector(
+    (state: { user: any }) => state.user
+  );
+
   const onSubmit: SubmitHandler<ILogin> = async (eventData) => {
     const { email, password } = eventData;
     console.log(email, password);
-
     try {
+      dispatch(
+        loginUser({
+          email: email,
+          password: password,
+        })
+      );
+
       Swal.fire({
         position: "top-end",
         timerProgressBar: true,
@@ -46,6 +61,14 @@ const Login = () => {
       });
     }
   };
+
+  const from = location?.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (user?.email) {
+      navigate(from);
+    }
+  }, [from, isLoading, navigate, user?.email]);
 
   return (
     <section>
