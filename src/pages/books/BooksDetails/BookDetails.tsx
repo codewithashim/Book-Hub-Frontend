@@ -1,4 +1,10 @@
-import { FaBookOpen, FaBookmark, FaCartPlus, FaEdit, FaTrash } from "react-icons/fa";
+import {
+  FaBookOpen,
+  FaBookmark,
+  FaCartPlus,
+  FaEdit,
+  FaTrash,
+} from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useGetSingleBookQuery } from "../../../redux/features/book/bookApi";
 // import { useAppDispatch } from "../../../redux/hook";
