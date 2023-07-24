@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../redux/hook";
@@ -11,10 +12,14 @@ const PrivetRouter = ({ children }: IProps) => {
   const { user, isLoading } = useAppSelector((state) => state.user);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        Loading...
+      </div>
+    );
   }
 
-  if (!user?.email && !isLoading) {
+  if (!user && !isLoading) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
