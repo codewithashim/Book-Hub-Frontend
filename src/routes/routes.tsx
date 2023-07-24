@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-// import PrivetRouterPage from "./PrivetRouter.tsx";
+import PrivetRouterPage from "./PrivetRouter.tsx";
 import App from "../App.tsx";
 import Login from "../pages/auth/Login/Login.tsx";
 import Signup from "../pages/auth/Signup/Signup.tsx";
@@ -7,6 +7,7 @@ import NotFound from "../components/NotFound/NotFound.tsx";
 import Home from "../pages/home/Home/home.tsx";
 import AllBooks from "../pages/books/AllBooks/AllBooks.tsx";
 import BookDetails from "../pages/books/BooksDetails/BookDetails.tsx";
+import EditeBook from "../components/ManageBooks/EditeBook/EditeBook.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -32,6 +33,22 @@ const routes = createBrowserRouter([
       {
         path: "/books-details/:id",
         element: <BookDetails />,
+      },
+      {
+        path: "/add-book",
+        element: (
+          <PrivetRouterPage>
+            <h1>Add Book</h1>
+          </PrivetRouterPage>
+        ),
+      },
+      {
+        path: "/edit-book/:id",
+        element: (
+          <PrivetRouterPage>
+            <EditeBook />
+          </PrivetRouterPage>
+        ),
       },
     ],
   },

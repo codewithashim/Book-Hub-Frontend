@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IBook } from "../../../types/globalTypes";
 
 interface IBookState {
@@ -12,9 +12,14 @@ const initialState: IBookState = {
 const bookSlice = createSlice({
   name: "book",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteBook: (state, action: PayloadAction<string>) => {
+      const bookIdToDelete = action.payload;
+      state.data = state.data.filter((book) => book._id !== bookIdToDelete);
+    },
+  },
 });
 
-export const {} = bookSlice.actions;
+export const { deleteBook } = bookSlice.actions;
 
 export default bookSlice.reducer;

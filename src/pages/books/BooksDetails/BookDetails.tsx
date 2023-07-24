@@ -5,17 +5,88 @@ import {
   FaEdit,
   FaTrash,
 } from "react-icons/fa";
-import { useParams } from "react-router-dom";
-import { useGetSingleBookQuery } from "../../../redux/features/book/bookApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  useDeleteBookMutation,
+  useGetSingleBookQuery,
+  useGetBooksQuery,
+} from "../../../redux/features/book/bookApi";
 // import { useAppDispatch } from "../../../redux/hook";
+import Swal from "sweetalert2";
 
 const BookDetails = () => {
   const { id } = useParams();
   const { data: books, isLoading } = useGetSingleBookQuery(id);
+
   // const dispatch = useAppDispatch();
   const bookData = books?.data;
+  const navigate = useNavigate();
+  const [deleteBook] = useDeleteBookMutation();
+  const getBooksQuery = useGetBooksQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
-  console.log(books?.data);
+  const handelDelete = async () => {
+    const confirmed = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (confirmed.isConfirmed) {
+      try {
+        const result = await deleteBook(id);
+        console.log(result, "+++");
+
+        if (!result) {
+          Swal.fire({
+            position: "center",
+            timerProgressBar: true,
+            title: "Something went wrong!",
+            iconColor: "#ED1C24",
+            toast: true,
+            icon: "error",
+            showClass: {
+              popup: "animate__animated animate__fadeInRight",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutRight",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            timerProgressBar: true,
+            title: "Successfully Delete Book !",
+            iconColor: "#ED1C24",
+            toast: true,
+            icon: "success",
+            showClass: {
+              popup: "animate__animated animate__fadeInRight",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutRight",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+          });
+          navigate("/all-books");
+          await getBooksQuery.refetch();
+        }
+      } catch (error) {
+        console.error(
+          "An unexpected error occurred while deleting the book:",
+          error
+        );
+      }
+    }
+  };
 
   // const handleAddChart = (product: IProduct) => {
   //   dispatch(addToCart(product));
@@ -51,14 +122,20 @@ const BookDetails = () => {
 
             <div className="productAddToCart m-2 md:flex gap-5 items-center">
               <div>
-                <button className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white">
+                <Link
+                  to={`/edit-book/${bookData?._id}`}
+                  className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white"
+                >
                   <FaEdit />
                   Edit Book
-                </button>
+                </Link>
               </div>
 
               <div>
-                <button className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white">
+                <button
+                  className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white"
+                  onClick={() => handelDelete()}
+                >
                   <FaTrash />
                   Delete Book
                 </button>
