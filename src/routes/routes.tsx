@@ -8,6 +8,7 @@ import Home from "../pages/home/Home/home.tsx";
 import AllBooks from "../pages/books/AllBooks/AllBooks.tsx";
 import BookDetails from "../pages/books/BooksDetails/BookDetails.tsx";
 import EditeBook from "../components/ManageBooks/EditeBook/EditeBook.tsx";
+import AddBook from "../pages/books/AddBook/AddBook.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const routes = createBrowserRouter([
         path: "/add-book",
         element: (
           <PrivetRouterPage>
-            <h1>Add Book</h1>
+            <AddBook />
           </PrivetRouterPage>
         ),
       },

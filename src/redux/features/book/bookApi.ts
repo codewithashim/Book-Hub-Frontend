@@ -39,4 +39,5 @@ export const {
   useGetSingleBookQuery,
   useUpdateBookMutation,
   useDeleteBookMutation,
+  useCreateBookMutation,
 } = bookApi;

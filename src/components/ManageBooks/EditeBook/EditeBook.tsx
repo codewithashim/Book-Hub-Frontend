@@ -22,7 +22,6 @@ const EditeBook = () => {
 
   const onSubmit = async (eventData: IBook) => {
     const { title, description, author, genre, publicationYear } = eventData;
-    console.log(title, description, author, genre, publicationYear);
     try {
       const data = {
         title: title,
