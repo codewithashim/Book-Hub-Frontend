@@ -9,6 +9,10 @@ import AllBooks from "../pages/books/AllBooks/AllBooks.tsx";
 import BookDetails from "../pages/books/BooksDetails/BookDetails.tsx";
 import EditeBook from "../components/ManageBooks/EditeBook/EditeBook.tsx";
 import AddBook from "../pages/books/AddBook/AddBook.tsx";
+import ReadingFuture from "../pages/bookmanagement/ReadingFuture/ReadingFuture.tsx";
+import Wiselist from "../pages/bookmanagement/Wiselist/Wiselist.tsx";
+import CurentlyReading from "../pages/bookmanagement/CurentlyReading/CurentlyReading.tsx";
+import FinishReading from "../pages/bookmanagement/FinishReading/FinishReading.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -48,6 +52,38 @@ const routes = createBrowserRouter([
         element: (
           <PrivetRouterPage>
             <EditeBook />
+          </PrivetRouterPage>
+        ),
+      },
+      {
+        path: "/reading-future",
+        element: (
+          <PrivetRouterPage>
+            <ReadingFuture />
+          </PrivetRouterPage>
+        ),
+      },
+      {
+        path: "/wishlist",
+        element: (
+          <PrivetRouterPage>
+            <Wiselist />
+          </PrivetRouterPage>
+        ),
+      },
+      {
+        path: "/curently-reading",
+        element: (
+          <PrivetRouterPage>
+            <CurentlyReading />
+          </PrivetRouterPage>
+        ),
+      },
+      {
+        path: "/finished-reading",
+        element: (
+          <PrivetRouterPage>
+            <FinishReading />
           </PrivetRouterPage>
         ),
       },

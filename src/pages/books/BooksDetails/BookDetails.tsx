@@ -11,14 +11,18 @@ import {
   useGetSingleBookQuery,
   useGetBooksQuery,
 } from "../../../redux/features/book/bookApi";
-// import { useAppDispatch } from "../../../redux/hook";
 import Swal from "sweetalert2";
+import { useAppSelector } from "../../../redux/hook";
+import Review from "../../../shared/Review/Review";
 
 const BookDetails = () => {
+  const { user } = useAppSelector((state: { user: any }) => state.user);
   const { id } = useParams();
-  const { data: books, isLoading } = useGetSingleBookQuery(id);
+  const { data: books, isLoading } = useGetSingleBookQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 10000,
+  });
 
-  // const dispatch = useAppDispatch();
   const bookData = books?.data;
   const navigate = useNavigate();
   const [deleteBook] = useDeleteBookMutation();
@@ -40,8 +44,6 @@ const BookDetails = () => {
     if (confirmed.isConfirmed) {
       try {
         const result = await deleteBook(id);
-        console.log(result, "+++");
-
         if (!result) {
           Swal.fire({
             position: "center",
@@ -88,13 +90,6 @@ const BookDetails = () => {
     }
   };
 
-  // const handleAddChart = (product: IProduct) => {
-  //   dispatch(addToCart(product));
-  //   toast({
-  //     description: "Product Added",
-  //   });
-  // };
-
   if (isLoading)
     return (
       <p className="flex items-center justify-center h-screen py-40 text-2xl">
@@ -120,27 +115,29 @@ const BookDetails = () => {
               />
             </div>
 
-            <div className="productAddToCart m-2 md:flex gap-5 items-center">
-              <div>
-                <Link
-                  to={`/edit-book/${bookData?._id}`}
-                  className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white"
-                >
-                  <FaEdit />
-                  Edit Book
-                </Link>
-              </div>
+            {user === bookData?.email && (
+              <div className="productAddToCart m-2 md:flex gap-5 items-center">
+                <div>
+                  <Link
+                    to={`/edit-book/${bookData?._id}`}
+                    className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white"
+                  >
+                    <FaEdit />
+                    Edit Book
+                  </Link>
+                </div>
 
-              <div>
-                <button
-                  className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white"
-                  onClick={() => handelDelete()}
-                >
-                  <FaTrash />
-                  Delete Book
-                </button>
+                <div>
+                  <button
+                    className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white"
+                    onClick={() => handelDelete()}
+                  >
+                    <FaTrash />
+                    Delete Book
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="productAddToCart m-2 md:flex gap-5 items-center py-2">
               <div>
@@ -222,6 +219,16 @@ const BookDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="lg:w-[80%] md:w-[80%] w-[95%] col-span-5 md:px-[60px] md:py-[50px] xxs:px-[25px] xs:px-[30px] sm:px-[60px] mx-auto bg-[#F7F7F7] shadow-md rounded-lg  py-10 px-2 my-4">
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Book Review</h2>
+        </div>
+
+        <div>
+          <Review bookData={bookData} />
         </div>
       </div>
     </section>

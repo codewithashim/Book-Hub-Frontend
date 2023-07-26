@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 
 export default function Navbar() {
   const { user } = useAppSelector((state) => state.user);
-  console.log(user);
 
   const dispatch = useAppDispatch();
 
@@ -32,9 +31,7 @@ export default function Navbar() {
       <li>
         <Link to="/all-books">All Books</Link>
       </li>
-      <li>
-        <Link to="/add-book">Add New Books</Link>
-      </li>
+      <li>{user && <Link to="/add-book">Add Book</Link>}</li>
     </>
   );
 
@@ -82,7 +79,7 @@ export default function Navbar() {
                   <FaCartPlus className="text-2xl" />
                 </Link>
 
-                <Link to="/bookmark">
+                <Link to="/reading-future">
                   <FaRegBookmark className="text-2xl" />
                 </Link>
               </div>
@@ -91,7 +88,15 @@ export default function Navbar() {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src={userIcon} alt="User Icon" />
+                  {user ? (
+                    <>
+                      <div className="w-10 h-10 rounded-full bg-red-400 text-center userProfile">
+                        <h2>{user.slice(0, 1)}</h2>
+                      </div>
+                    </>
+                  ) : (
+                    <img src={userIcon} alt="User Icon" />
+                  )}
                 </div>
               </label>
               <ul
@@ -114,7 +119,10 @@ export default function Navbar() {
                 {user && (
                   <>
                     <li>
-                      <Link to="/dashboard">Dashboard</Link>
+                      <Link to="/curently-reading">Curently Reading</Link>
+                    </li>
+                    <li>
+                      <Link to="/finished-reading">Finished Reading</Link>
                     </li>
                     <li>
                       <button onClick={handelLogout}>Logout</button>
