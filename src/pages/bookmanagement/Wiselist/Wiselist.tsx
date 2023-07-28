@@ -1,8 +1,7 @@
 import { FaTrash } from "react-icons/fa";
 import {
   useDeleteWishlistMutation,
-  useGetWishlistByUserEmailQuery,
-  useGetWishlistQuery,
+  useGetWishlistByUserEmailQuery
 } from "../../../redux/features/book/bookApi";
 import { useAppSelector } from "../../../redux/hook";
 import Swal from "sweetalert2";
