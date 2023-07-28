@@ -4,7 +4,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import loginImg from "../../../assets/auth/usersignUp.jpeg";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IRegister } from "../../../types/globalTypes";
 import google from "../../../assets/icons/google.svg";
 import { useAppDispatch } from "../../../redux/hook";
@@ -18,6 +18,8 @@ const Signup = () => {
   const passwordVisible = () => {
     setShowPassword(showPassword ? false : true);
   };
+
+  const navigation = useNavigate();
 
   const dispatch = useAppDispatch();
   const [postUser] = usePostUserMutation();
@@ -52,6 +54,7 @@ const Signup = () => {
           text: "Your account has been created successfully.",
           confirmButtonColor: "#0077b6",
         });
+        navigation("/login");
       }
     } catch (error) {
       Swal.fire({
