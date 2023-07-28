@@ -1,4 +1,4 @@
-import { FaBookOpen, FaCartPlus } from "react-icons/fa";
+import { FaBookOpen } from "react-icons/fa";
 import { IBookCardProps } from "../../types/globalTypes";
 import { Link } from "react-router-dom";
 
@@ -30,10 +30,6 @@ const BookCard = ({ book }: IBookCardProps) => {
               <FaBookOpen />
               Details
             </Link>
-            <button className="btn btn-outline-primary">
-              <FaCartPlus />
-              Wishlist
-            </button>
           </div>
         </div>
       </div>

@@ -39,3 +39,11 @@ export interface IRegister {
   password: string;
   confirmPassword: string;
 }
+
+export interface IWishlist {
+  _id: string;
+  userEmail: string;
+  bookId: string;
+  bookTitle: string;
+  bookAuthor: string;
+}

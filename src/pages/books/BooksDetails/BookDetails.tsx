@@ -10,6 +10,7 @@ import {
   useDeleteBookMutation,
   useGetSingleBookQuery,
   useGetBooksQuery,
+  usePostWishlistMutation,
 } from "../../../redux/features/book/bookApi";
 import Swal from "sweetalert2";
 import { useAppSelector } from "../../../redux/hook";
@@ -25,6 +26,7 @@ const BookDetails = () => {
 
   const bookData = books?.data;
   const navigate = useNavigate();
+  const [postWishlist] = usePostWishlistMutation();
   const [deleteBook] = useDeleteBookMutation();
   const getBooksQuery = useGetBooksQuery(undefined, {
     refetchOnMountOrArgChange: true,
@@ -90,6 +92,75 @@ const BookDetails = () => {
     }
   };
 
+  const addToWishlist = async () => {
+    try {
+      const wishListData = {
+        bookId: id,
+        userEmail: user,
+        bookAuthor: bookData?.author,
+        bookTitle: bookData?.title,
+      };
+
+      const result = await postWishlist({
+        data: wishListData,
+      });
+
+      console.log(result);
+      if (result) {
+        Swal.fire({
+          position: "center",
+          timerProgressBar: true,
+          title: "Successfully Added to Wishlist !",
+          iconColor: "#ED1C24",
+          toast: true,
+          icon: "success",
+          showClass: {
+            popup: "animate__animated animate__fadeInRight",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutRight",
+          },
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        Swal.fire({
+          position: "center",
+          timerProgressBar: true,
+          title: "Something went wrong!",
+          iconColor: "#ED1C24",
+          toast: true,
+          icon: "error",
+          showClass: {
+            popup: "animate__animated animate__fadeInRight",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutRight",
+          },
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        timerProgressBar: true,
+        title: "Something went wrong!",
+        iconColor: "#ED1C24",
+        toast: true,
+        icon: "error",
+        showClass: {
+          popup: "animate__animated animate__fadeInRight",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutRight",
+        },
+        showConfirmButton: false,
+        timer: 3500,
+      });
+    }
+  };
+
   if (isLoading)
     return (
       <p className="flex items-center justify-center h-screen py-40 text-2xl">
@@ -140,8 +211,11 @@ const BookDetails = () => {
             )}
 
             <div className="productAddToCart m-2 md:flex gap-5 items-center py-2">
-              <div>
-                <button className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white">
+              <div className={!user ? "disabled" : "block"}>
+                <button
+                  className="border  px-4 py-4 flex justify-center items-center gap-4 hover:border-red-500 color-b bg-red-500 p-2 md:p-3 text-center rounded-md duration-300 transform  shadow-sm hover:-translate-y-1.5 border-t border-slate-100 hover:bg-red-10 hover:text-white"
+                  onClick={() => addToWishlist()}
+                >
                   <FaCartPlus />
                   Add to Wishlist
                 </button>
