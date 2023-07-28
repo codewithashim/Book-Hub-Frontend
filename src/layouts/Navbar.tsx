@@ -91,7 +91,7 @@ export default function Navbar() {
                   {user ? (
                     <>
                       <div className="w-10 h-10 rounded-full bg-red-400 text-center userProfile">
-                        <h2>{user.slice(0, 1)}</h2>
+                        <h2>{user?.slice(0, 1)}</h2>
                       </div>
                     </>
                   ) : (
