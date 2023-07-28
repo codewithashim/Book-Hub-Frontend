@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FaCartPlus, FaRegBookmark } from "react-icons/fa";
 import userIcon from "../assets/icons/user.png";
 import Swal from "sweetalert2";
+import { BiUserCheck } from "react-icons/bi";
 
 export default function Navbar() {
   const { user } = useAppSelector((state) => state.user);
@@ -91,7 +92,7 @@ export default function Navbar() {
                   {user ? (
                     <>
                       <div className="w-10 h-10 rounded-full bg-red-400 text-center userProfile">
-                        <h2>{user?.slice(0, 1)}</h2>
+                        <BiUserCheck className="text-2xl" />
                       </div>
                     </>
                   ) : (
