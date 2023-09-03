@@ -1,0 +1,99 @@
+.calendar {
+  width: 20.49vw;
+  height: 18.95vw;
+  margin: 0vw auto;
+  padding: 1.25vw;
+  border-radius: 0.5vw;
+
+  .year-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .month-left-arrow,
+    .month-right-arrow {
+      cursor: pointer;
+      width: 1.1111111111vw;
+    }
+
+    .rightBtn {
+      display: flex;
+      rotate: 180deg;
+      cursor: pointer;
+      width: 1vw;
+    }
+
+    .years {
+      font-family: Inter;
+      font-size: 1.1111111111vw;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+
+  .dayname-and-month-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .day-container {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1.4vw;
+      margin: 0 auto;
+    }
+
+    .day {
+      font-weight: 600;
+      font-size: 1.1vw;
+      cursor: pointer;
+      width: 1.2vw;
+      height: 1.2vw;
+      display: flex;
+      padding: 0.4vw;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease-in-out;
+    }
+    .selected {
+      background-color: #4272c0;
+      color: #fff;
+      padding: 0.4vw;
+      width: 1.2vw;
+      height: 1.2vw;
+      font-weight: 600;
+      text-align: center;
+      border-radius: 0.4vw;
+    }
+
+    .other-month {
+      color: #898989 !important;
+    }
+    .today {
+      border: 2px solid #2b539a;
+    }
+
+    .day-names {
+      display: flex;
+      gap: 1.12vw;
+      justify-content: center;
+      align-items: center;
+      margin: 0.7vw auto;
+
+      .day-name {
+        font-weight: 400;
+        font-size: 1.3vw;
+        display: flex;
+        margin-bottom: 0.3vw;
+        align-items: center;
+        justify-content: space-between;
+        color: #898989;
+        font-family: Inter;
+        font-style: normal;
+        line-height: normal;
+      }
+    }
+  }
+}

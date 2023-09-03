@@ -13,6 +13,7 @@ import ReadingFuture from "../pages/bookmanagement/ReadingFuture/ReadingFuture.t
 import Wiselist from "../pages/bookmanagement/Wiselist/Wiselist.tsx";
 import CurentlyReading from "../pages/bookmanagement/CurentlyReading/CurentlyReading.tsx";
 import FinishReading from "../pages/bookmanagement/FinishReading/FinishReading.tsx";
+import Clendar from "../pages/calendar/Clendar.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ const routes = createBrowserRouter([
         path: "/books-details/:id",
         element: <BookDetails />,
       },
+      {
+        path: "/calendar",
+        element: <Clendar />,
+      }
+      ,
       {
         path: "/add-book",
         element: (
